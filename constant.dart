@@ -1,19 +1,33 @@
 import 'package:flutter/material.dart';
-const Color grayColor=Colors.cyan;
-const Color orangeColor=Colors.deepOrange;
-const Color yellowColor=Colors.yellowAccent;
+import 'package:maheer_khan/constant.dart';
 
-const headingTextStyle=TextStyle(
+class MyButton extends StatelessWidget {
+  final String title;
+  final Color color;
+  final VoidCallback onpress;
 
-  color: Colors.white,
-  fontSize: 25,
-  fontWeight: FontWeight.bold,
-);
+  const MyButton({
+    super.key,
+    required this.title,
+    required this.onpress,
+    this.color = grayColor,
+  });
 
-final containerDec=Container(
-  width: 222,
-    height: 222,
-
-  color: Colors.red,
-  child: Text('Constructor-Container'),
-);
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: InkWell(
+        onTap: onpress,
+        child: Container(
+          decoration: BoxDecoration(
+            color: color,
+            shape: BoxShape.circle,
+          ),
+          width: 70,
+          height: 70,
+          child: Center(child: Text(title, style: headingTextStyle)),
+        ),
+      ),
+    );
+  }
+}
